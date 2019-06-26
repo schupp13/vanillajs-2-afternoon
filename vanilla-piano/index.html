@@ -105,7 +105,7 @@
         </div>
 
         <svg height="230">
-            <polygon points="200,10 230,10 230,100 245,100 245,220 200,220 200,10" class="white pianoKey" data-key="97" />
+            <polygon points="443,10 230,10 230,100 245,100 245,220 200,220 200,10" class="white pianoKey" data-key="97" />
             <polygon points="245,100 260,100 260,10 275,10 275,100 290,100 290,220 245,220 245,100" class="white pianoKey" data-key="115"
             />
             <polygon points="305,10 335,10 335,220 290,220 290,100 305,100 305,10" class="white pianoKey" data-key="100" />
@@ -165,6 +165,22 @@
 </body>
 
 <script>
+    window.addEventListener("keypress", (event) =>{
+        const tone = document.querySelector(`audio[data-key="${event.keyCode}"]`);
+        if(!tone){
+            return
+        }
+
+        const pianoKey = document.querySelector(`.pianoKey[data-key="${event.keyCode}"`);
+
+        tone.currentTime = 0;
+        pianoKey.classList.add("pressed");
+        tone.play();
+        setTimeout(()=>{
+            pianoKey.classList.remove("pressed");
+        },300);
+             
+    });
 </script>
 
 </html>
